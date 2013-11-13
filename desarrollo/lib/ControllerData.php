@@ -76,8 +76,7 @@ class ControllerData {
                 $arrjson = array('output' => array('valid' => true, 'id' => $id));
             }
         } else {
-            $q = "INSERT INTO tbl_dato (hcmtr_pavimentado, hcmtr_inversion, hcmtr_fecha, hcmtr_fchregist,hcmtr_actual_pavimento,hcmtr_actual_inversion,hcmtr_actual_minuto,hcmtr_actual_hora)
-                VALUES ('$this->hcmtr_pavimentado', '$this->hcmtr_inversion', '$this->hcmtr_fecha', '$this->hcmtr_fchregist', '$this->hcmtr_actual_pavimento',, '$this->hcmtr_actual_inversion',, '$this->hcmtr_actual_minuto',, '$this->hcmtr_actual_hora')";
+            $q = "INSERT INTO tbl_dato (hcmtr_pavimentado, hcmtr_inversion, hcmtr_fecha, hcmtr_fchregist) VALUES ('$this->hcmtr_pavimentado', '$this->hcmtr_inversion', '$this->hcmtr_fecha', NOW())";
             mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
             $id = mysql_insert_id();
             $arrjson = array('output' => array('valid' => true, 'id' => $id));
@@ -99,12 +98,7 @@ class ControllerData {
                 'hcmtr_pavimentado' => ($obj->hcmtr_pavimentado),
                 'hcmtr_inversion' => ($obj->hcmtr_inversion),
                 'hcmtr_fecha' => ($obj->hcmtr_fecha),
-                'hcmtr_fchregist' => ($obj->hcmtr_fchregist),
-                'hcmtr_actual_pavimento' => ($obj->hcmtr_actual_pavimento),
-                'hcmtr_actual_inversion' => ($obj->hcmtr_actual_inversion),
-                'hcmtr_actual_minuto' => ($obj->hcmtr_actual_minuto),
-                'hcmtr_actual_hora' => ($obj->hcmtr_actual_hora)
-            );
+                'hcmtr_fchregist' => ($obj->hcmtr_fchregist));
         }
         if ($resultado > 0) {
             $arrjson = array('output' => array('valid' => true, 'response' => $arr));
