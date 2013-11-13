@@ -5,31 +5,31 @@ include '../desarrollo/lib/ControllerData.php';
  * se cargan datos
  */
 $DATOS = new ControllerData();
-$DATOS->dataget();
+$DATOS->datagetFecha('2013-11-13');
 $arrdatos = $DATOS->getResponse();
 $isvalid = $arrdatos['output']['valid'];
 $arrdatos = $arrdatos['output']['response'];
 
 $fch = date("d-m-Y");
 $hora = date("H:i:s");
+
+print_r($arrdatos);
 echo $hora;
 //Con todos los datos
 $c = count($arrdatos);
 if ($isvalid) {
-    for ($i = 0; $i < $c; $i++) {
-        $pavimentado1 = $arrdatos['hcmtr_pavimentado'];
-        $inversion1 = $arrdatos['hcmtr_inversion'];
-        $fecha1 = $arrdatos['hcmtr_fecha'];
-        $pavimentado_actual = $arrdatos['hcmtr_actual_pavimento'];
-        $inversion_actual = $arrdatos['hcmtr_actual_inversion'];
-        $minuto_actual = $arrdatos['hcmtr_actual_minuto'];
-        $hora_actual = $arrdatos['hcmtr_actual_hora'];
+    $pavimentado1 = $arrdatos[0]['hcmtr_pavimentado'];
+    $inversion1 = $arrdatos[0]['hcmtr_inversion'];
+    $fecha1 = $arrdatos[0]['hcmtr_fecha'];
+    $pavimentado_actual = $arrdatos[0]['hcmtr_actual_pavimento'];
+    $inversion_actual = $arrdatos[0]['hcmtr_actual_inversion'];
+    $minuto_actual = $arrdatos[0]['hcmtr_actual_minuto'];
+    $hora_actual = $arrdatos[0]['hcmtr_actual_hora'];
 
-        $cantPavi = $cantPavi + $pavimentado1;
-        $cantPaviTOTAL = $cantPaviTOTAL + $pavimentado1;
-        $cantinver = $cantinver + $inversion1;
-        $cantinverTOTAL = $cantinverTOTAL + $inversion1;
-    }
+    $cantPavi = $cantPavi + $pavimentado1;
+    $cantPaviTOTAL = $cantPaviTOTAL + $pavimentado1;
+    $cantinver = $cantinver + $inversion1;
+    $cantinverTOTAL = $cantinverTOTAL + $inversion1;
 }
 
 $sw = $_REQUEST['sw'];

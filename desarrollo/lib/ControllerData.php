@@ -1,4 +1,5 @@
 <?php
+
 include 'ConectionDb.php';
 include 'Util.php';
 
@@ -112,24 +113,19 @@ class ControllerData {
         $this->response = ($arrjson);
     }
 
-    public function datagetFecha($fch) {
-        $q = "SELECT * FROM tbl_dato WHERE hcmtr_fecha='" . $fch . "'";
+    public function datagetFecha($fch, $hora) {
+        $q = "SELECT * FROM tbl_dato WHERE hcmtr_fecha='" . $fch . "' and ";
         $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
         $resultado = mysql_num_rows($con);
         $arr = array();
         while ($obj = mysql_fetch_object($con)) {
-            $arr[] = array(
-                'hcmtr_id' => $obj->hcmtr_id,
-                'hcmtr_pavimentado' => ($obj->hcmtr_pavimentado),
-                'hcmtr_inversion' => ($obj->hcmtr_inversion),
-                'hcmtr_fecha' => ($obj->hcmtr_fecha),
-                'hcmtr_fchregist' => ($obj->hcmtr_fchregist),
-                'hcmtr_actual_pavimento' => ($obj->hcmtr_actual_pavimento),
-                'hcmtr_actual_inversion' => ($obj->hcmtr_actual_inversion),
-                'hcmtr_actual_minuto' => ($obj->hcmtr_actual_minuto),
-                'hcmtr_actual_hora' => ($obj->hcmtr_actual_hora)
-            );
+        
+            
         }
+        $arr = array(
+        'total_pavimentado' => ($total_pavimentado),
+        'total_inversion' => ($total_inversion),
+        'total_fecha' => ($total_fecha));
         if ($resultado > 0) {
             $arrjson = array('output' => array('valid' => true, 'response' => $arr));
         } else {
