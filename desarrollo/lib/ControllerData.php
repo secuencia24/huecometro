@@ -20,7 +20,7 @@ class ControllerData {
         $rqst = $_REQUEST;
         $this->op = isset($rqst['op']) ? $rqst['op'] : '';
         $this->id = isset($rqst['id']) ? intval($rqst['id']) : 0;
-       
+
         $this->ke = isset($rqst['ke']) ? $rqst['ke'] : '';
         $this->lu = isset($rqst['lu']) ? $rqst['lu'] : '';
         $this->ti = isset($rqst['ti']) ? $rqst['ti'] : '';
@@ -32,6 +32,10 @@ class ControllerData {
             $this->hcmtr_inversion = isset($rqst['hcmtr_inversion']) ? $rqst['hcmtr_inversion'] : '';
             $this->hcmtr_fecha = isset($rqst['hcmtr_fecha']) ? $rqst['hcmtr_fecha'] : '';
             $this->hcmtr_fchregist = isset($rqst['hcmtr_fchregist']) ? $rqst['hcmtr_fchregist'] : '';
+            $this->hcmtr_actual_pavimento = isset($rqst['hcmtr_actual_pavimento']) ? $rqst['hcmtr_actual_pavimento'] : '';
+            $this->hcmtr_actual_inversion = isset($rqst['hcmtr_actual_inversion']) ? $rqst['hcmtr_actual_inversion'] : '';
+            $this->hcmtr_actual_minuto = isset($rqst['hcmtr_actual_minuto']) ? $rqst['hcmtr_actual_minuto'] : '';
+            $this->hcmtr_actual_hora = isset($rqst['hcmtr_actual_hora']) ? $rqst['hcmtr_actual_hora'] : '';
             $this->datasave();
         } else if ($this->op == 'dataget') {
             $this->dataget();
@@ -61,14 +65,19 @@ class ControllerData {
                     'hcmtr_pavimentado' => $this->hcmtr_pavimentado,
                     'hcmtr_inversion' => $this->hcmtr_inversion,
                     'hcmtr_fecha' => $this->hcmtr_fecha,
-                    'hcmtr_fchregist' => $this->hcmtr_fchregist);
+                    'hcmtr_fchregist' => $this->hcmtr_fchregist,
+                    'hcmtr_actual_pavimento' => $this->hcmtr_actual_pavimento,
+                    'hcmtr_actual_inversion' => $this->hcmtr_actual_inversion,
+                    'hcmtr_actual_minuto' => $this->hcmtr_actual_minuto,
+                    'hcmtr_actual_hora' => $this->hcmtr_actual_hora);
                 $arrfieldsnocomma = array();
                 $q = $this->UTILITY->make_query_update($table, "hcmtr_id = '$id'", $arrfieldscomma, $arrfieldsnocomma);
                 mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
                 $arrjson = array('output' => array('valid' => true, 'id' => $id));
             }
         } else {
-            $q = "INSERT INTO tbl_dato (hcmtr_pavimentado, hcmtr_inversion, hcmtr_fecha, hcmtr_fchregist) VALUES ('$this->hcmtr_pavimentado', '$this->hcmtr_inversion', '$this->hcmtr_fecha', '$this->hcmtr_fchregist')";
+            $q = "INSERT INTO tbl_dato (hcmtr_pavimentado, hcmtr_inversion, hcmtr_fecha, hcmtr_fchregist,hcmtr_actual_pavimento,hcmtr_actual_inversion,hcmtr_actual_minuto,hcmtr_actual_hora)
+                VALUES ('$this->hcmtr_pavimentado', '$this->hcmtr_inversion', '$this->hcmtr_fecha', '$this->hcmtr_fchregist', '$this->hcmtr_actual_pavimento',, '$this->hcmtr_actual_inversion',, '$this->hcmtr_actual_minuto',, '$this->hcmtr_actual_hora')";
             mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
             $id = mysql_insert_id();
             $arrjson = array('output' => array('valid' => true, 'id' => $id));
@@ -90,7 +99,12 @@ class ControllerData {
                 'hcmtr_pavimentado' => ($obj->hcmtr_pavimentado),
                 'hcmtr_inversion' => ($obj->hcmtr_inversion),
                 'hcmtr_fecha' => ($obj->hcmtr_fecha),
-                'hcmtr_fchregist' => ($obj->hcmtr_fchregist));
+                'hcmtr_fchregist' => ($obj->hcmtr_fchregist),
+                'hcmtr_actual_pavimento' => ($obj->hcmtr_actual_pavimento),
+                'hcmtr_actual_inversion' => ($obj->hcmtr_actual_inversion),
+                'hcmtr_actual_minuto' => ($obj->hcmtr_actual_minuto),
+                'hcmtr_actual_hora' => ($obj->hcmtr_actual_hora)
+            );
         }
         if ($resultado > 0) {
             $arrjson = array('output' => array('valid' => true, 'response' => $arr));
@@ -124,6 +138,7 @@ class ControllerData {
     public function setId($_id) {
         $this->id = $_id;
     }
+
 }
 
 ?>
