@@ -5,7 +5,7 @@ include '../desarrollo/lib/ControllerData.php';
  * se cargan datos
  */
 $DATOS = new ControllerData();
-$DATOS->datagetFecha('2013-11-13');
+$DATOS->dataget();
 $arrdatos = $DATOS->getResponse();
 $isvalid = $arrdatos['output']['valid'];
 $arrdatos = $arrdatos['output']['response'];

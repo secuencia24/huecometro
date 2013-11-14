@@ -76,7 +76,8 @@ class ControllerData {
                 $arrjson = array('output' => array('valid' => true, 'id' => $id));
             }
         } else {
-            $q = "INSERT INTO tbl_dato (hcmtr_pavimentado, hcmtr_inversion, hcmtr_fecha, hcmtr_fchregist) VALUES ('$this->hcmtr_pavimentado', '$this->hcmtr_inversion', '$this->hcmtr_fecha', NOW())";
+            $q = "INSERT INTO tbl_dato (hcmtr_pavimentado, hcmtr_inversion, hcmtr_fecha, hcmtr_fchregist)
+                VALUES ('$this->hcmtr_pavimentado', '$this->hcmtr_inversion', '$this->hcmtr_fecha', NOW())";
             mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
             $id = mysql_insert_id();
             $arrjson = array('output' => array('valid' => true, 'id' => $id));
@@ -114,18 +115,35 @@ class ControllerData {
     }
 
     public function datagetFecha($fch, $hora) {
-        $q = "SELECT * FROM tbl_dato WHERE hcmtr_fecha='" . $fch . "' and ";
+        $hora = date("H:i:s");
+        $q = "SELECT * FROM tbl_dato WHERE hcmtr_fecha='" . $fch . "' and hcmtr_actual_hora='" . $hora . "'";
+        if ($q != "") {
+            $arr[] = array(
+                'hcmtr_id' => $obj->hcmtr_id,
+                'hcmtr_actual_pavimento' => ($obj->hcmtr_actual_pavimento),
+                'admin_contrasenia' => ($obj->admin_contrasenia),
+                'hcmtr_actual_inversion' => ($obj->hcmtr_actual_inversion),
+                'hcmtr_actual_minuto' => ($obj->hcmtr_actual_minuto),
+                'hcmtr_actual_hora' => ($obj->hcmtr_actual_hora)
+            );
+            if (($obj->hcmtr_actual_hora) > $hora) {
+                $horaactual = ($hora - '00:05:00');
+            } else {
+                //actualizar y enviar dato
+                
+            }
+        }
         $con = mysql_query($q, $this->conexion) or die(mysql_error() . "***ERROR: " . $q);
         $resultado = mysql_num_rows($con);
         $arr = array();
         while ($obj = mysql_fetch_object($con)) {
-        
+            
             
         }
         $arr = array(
-        'total_pavimentado' => ($total_pavimentado),
-        'total_inversion' => ($total_inversion),
-        'total_fecha' => ($total_fecha));
+            'total_pavimentado' => ($total_pavimentado),
+            'total_inversion' => ($total_inversion),
+            'total_fecha' => ($total_fecha));
         if ($resultado > 0) {
             $arrjson = array('output' => array('valid' => true, 'response' => $arr));
         } else {
