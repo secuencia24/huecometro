@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* CSS Document */
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
+	display: block;
+}
+
+* {
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+html, body {
+	font-family: Arial;
+	font-size: 16px;
+	margin:0;
+	padding:0;
+}
+#contenido{
+	height: auto;
+	width: 1000px;
+}
+.divmenu{
+   float:left;
+   margin:10px 5px;;
+   width:20%;
+   height:auto;
+}
+.divcontenidoo{
+  float:left;
+  margin:10px 5px;
+  width:77%;
+  height:auto;
+}
+
+.divcontenido{
+  float:left;
+  margin:10px;
+  width:100%;
+  height:auto;
+}
+
