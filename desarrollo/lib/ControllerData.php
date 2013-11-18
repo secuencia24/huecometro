@@ -41,6 +41,8 @@ class ControllerData {
             $this->dataget();
         } else if ($this->op == 'datagetactual') {
             $this->datagetactual();
+        } else if ($this->op == 'datagetactualtxt') {
+            $this->datagetactual();
         } else if ($this->op == 'datadelete') {
             $this->datadelete();
         } else if ($this->op == 'noautorizado') {
@@ -390,6 +392,13 @@ class ControllerData {
     public function getResponseJSON() {
         $this->CDB->closeConect();
         return json_encode($this->response);
+    }
+
+    public function getResponseDatagetactualTXT() {
+        $this->CDB->closeConect();
+        $arrResponse = $this->response['output']['response'];
+        $txt = $arrResponse['actual_pavimentado'].",".$arrResponse['actual_inversion'].",".$arrResponse['fecha'].",".$arrResponse['hora'].",".$arrResponse['r'];
+        return ($txt);
     }
 
     public function setId($_id) {
