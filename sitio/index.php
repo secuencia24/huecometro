@@ -8,7 +8,7 @@ $hoy = date("d-m-Y");
 $DATOS = new ControllerData();
 $DATOS->datagetactual();
 $arrdatos = $DATOS->getResponse();
-print_r($arrdatos);
+//print_r($arrdatos);
 $isvalid = $arrdatos['output']['valid'];
 $arrdatos = $arrdatos['output']['response'];
 $c = count($arrdatos);
@@ -44,14 +44,44 @@ if ($isvalid) {
         </script>
         <!--Fin if IE-->
         <!--        refrescar la pagina x tiempo que queramos-->
+        <script type="text/javascript" src="admin/js/jquery/jquery-1.7.2.min.js"></script>
         <script type="text/javascript">
-//            setTimeout(function() {
-//                document.getElementById("ismForm").submit();
-//            }, 3000);
+            function lee_json() {
+                $.ajax({
+                    dataType: 'json',
+                    url: 'http://php52.secuencia24.com/huecometro/admin/ajax/rqst.php?op=datagetactual',
+                    type: 'POST',
+                    success: function(datos) {
+                        for (var clave in datos) {
+                            if (datos.hasOwnProperty(clave)) {
+                               var pavimentado = datos["output"]["response"]["actual_pavimentado"];
+                                var inversion = datos["output"]["response"]["actual_inversion"];
+                                //var fecha = datos["output"]["response"]["fecha"];
+                                //var hora = datos["output"]["response"]["hora"];
+                                //var r = datos["output"]["response"]["r"];
+
+                                //$('#pavimento').attr("value", pavimentado);
+                                //$('#inversion').attr("value", inversion);
+                                $('#pavimento').html(pavimentado);
+                                $('#inversion').html( inversion);
+                                //alert('pavimentado :'+pavimentado);
+                                //$('#fecha').attr("value", fecha);
+                                //$('#hora').attr("value", hora);
+                                //$('#r').attr("value", r);
+                            }
+                        }
+                    },
+                    error: function() {
+                        //alert("Error leyendo fichero jsonP");
+                    }
+                });
+            }
+            var int=self.setInterval("lee_json()",300000);
+            //var int=self.setInterval("lee_json()",300);
         </script>
     </head>
 
-    <body>
+    <body onload="lee_json();">
         <section class="boxGeneral">
             <!--<div class="boxTexSup">Texto</div>-->
             <section class="boxPrinHueco" >
@@ -66,13 +96,13 @@ if ($isvalid) {
                         <img src="images/TexHuecoPavl.png" width="100%" >
                     </div>
                     <div class="RelojHueco">
-                        <p ><?php echo $total_pavimentado; ?></p>
+                        <p id="pavimento"></p>
                     </div>
                     <div class="boxTexInver" >
                         <img src="images/TexInver.png" width="100%" >
                     </div>
                     <div class="RelojFechaInver">
-                        <p ><?php echo $total_inversion; ?></p>
+                        <p id="inversion"></p>
                     </div>
                     <div class="boxTexMillon">
                         <img src="images/TexMillones.png" width="100%" >
