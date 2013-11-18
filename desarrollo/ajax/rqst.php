@@ -13,6 +13,10 @@ if ($op == 'datasave' || $op == 'dataget' || $op == 'datadelete' || $op == 'data
     include '../lib/ControllerData.php';
     $CONTROL = new ControllerData();
     echo $CONTROL->getResponseJSON(); 
+}else if ($op == 'datagetactualtxt' ) {
+    include '../lib/ControllerData.php';
+    $CONTROL = new ControllerData();
+    echo $CONTROL->getResponseDatagetactualTXT(); 
 }else if ($op == 'usersave' || $op == 'userget' || $op == 'userdelete' || $op == 'userlogin' ) {
     include '../lib/ControllerUser.php';
     $CONTROL = new ControllerUser();
