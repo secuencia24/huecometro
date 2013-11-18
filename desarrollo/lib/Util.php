@@ -412,6 +412,19 @@ class Util {
         $factor = pow(10, $decimales);
         return (round($numero * $factor) / $factor);
     }
+    
+    /**
+     * La hora debe tener el formato militar "HH:mm"
+     * @param String $HHmm
+     * @return int cantidad de minutos
+     */
+    public static function convertHourToMinutes($HHmm){
+        $arrHHMM = explode(":", $HHmm);
+        $hora = intval($arrHHMM[0]);
+        $minuto = intval($arrHHMM[1]);
+        $minutoenhora = (60 * $hora) + $minuto;
+        return $minutoenhora;
+    }
 
     public function error_invalid_method_called() {
         return array('output' => array('valid' => false, 'response' => array('code' => '101', 'content' => ' Metodo no existe.')));

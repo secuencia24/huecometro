@@ -21,7 +21,8 @@ class ConectionDb {
 	$this->db = "huecometro_db";
         
 	//Este es el timestamp que se debe ingresar, de acuerdo a la hora deseada
-	$this->server_date = 'DATE_ADD(NOW(),INTERVAL 1 HOUR)';
+	//$this->server_date = 'DATE_ADD(NOW(),INTERVAL 5 HOUR)';
+	$this->server_date = 'NOW()';
 	$this->connection = NULL;
     }
 

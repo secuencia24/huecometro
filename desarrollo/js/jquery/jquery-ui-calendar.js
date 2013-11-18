@@ -9,12 +9,12 @@ $.datepicker.regional['es'] = {
     dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sab'],
     dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
     weekHeader: 'Sm',
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd-mm-yy',
     firstDay: 1,
     isRTL: false,
     showMonthAfterYear: false,
     yearSuffix: ''
 };
 $.datepicker.setDefaults( $.datepicker.regional[ "es" ] );
-$.datepicker.setDefaults( "option", "dateFormat", "yy-mm-dd" );
+$.datepicker.setDefaults( "option", "dateFormat", "dd-mm-yy" );
 $.datepicker.setDefaults( {changeMonth: true, changeYear: true});

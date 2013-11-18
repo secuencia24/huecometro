@@ -9,8 +9,8 @@ function initdatos() {
     q.ke = _ucode;
     q.lu = _ulcod;
     q.ti = _utval;
-    pavimento = $("#pavimento");
-    inversion = $("#inversion");
+    pavimento = $("#hcmtr_pavimentado");
+    inversion = $("#hcmtr_inversion");
     allFields = $([]).add(pavimento).add(inversion);
     tips = $(".validateTips");
 

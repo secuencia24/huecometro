@@ -9,7 +9,7 @@ header("Content-type: application/javascript; charset=utf-8");
 header("Cache-Control: max-age=15, must-revalidate");
 header('Access-Control-Allow-Origin: *');
 
-if ($op == 'datasave' || $op == 'dataget' || $op == 'datadelete') {
+if ($op == 'datasave' || $op == 'dataget' || $op == 'datadelete' || $op == 'datagetactual' ) {
     include '../lib/ControllerData.php';
     $CONTROL = new ControllerData();
     echo $CONTROL->getResponseJSON(); 

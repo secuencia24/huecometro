@@ -1,8 +1,8 @@
 <?php
 //include '../desarrollo/include/generic_validate_session.php';
-//include '../desarrollo/lib/ControllerData.php';
+include '../desarrollo/lib/ControllerData.php';
 //include 'admin/include/generic_validate_session.php';
-include 'admin/lib/ControllerData.php';
+//include 'admin/lib/ControllerData.php';
 
 $hoy = date("d-m-Y");
 $DATOS = new ControllerData();
@@ -44,7 +44,7 @@ if ($isvalid) {
         </script>
         <!--Fin if IE-->
         <!--        refrescar la pagina x tiempo que queramos-->
-        <script type="text/javascript" src="admin/js/jquery/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="../desarrollo/js/jquery/jquery-1.7.2.min.js"></script>
         <script type="text/javascript">
             function lee_json() {
                 $.ajax({
@@ -54,7 +54,7 @@ if ($isvalid) {
                     success: function(datos) {
                         for (var clave in datos) {
                             if (datos.hasOwnProperty(clave)) {
-                               var pavimentado = datos["output"]["response"]["actual_pavimentado"];
+                                var pavimentado = datos["output"]["response"]["actual_pavimentado"];
                                 var inversion = datos["output"]["response"]["actual_inversion"];
                                 //var fecha = datos["output"]["response"]["fecha"];
                                 //var hora = datos["output"]["response"]["hora"];
@@ -63,7 +63,7 @@ if ($isvalid) {
                                 //$('#pavimento').attr("value", pavimentado);
                                 //$('#inversion').attr("value", inversion);
                                 $('#pavimento').html(pavimentado);
-                                $('#inversion').html( inversion);
+                                $('#inversion').html(inversion);
                                 //alert('pavimentado :'+pavimentado);
                                 //$('#fecha').attr("value", fecha);
                                 //$('#hora').attr("value", hora);
@@ -76,7 +76,7 @@ if ($isvalid) {
                     }
                 });
             }
-            var int=self.setInterval("lee_json()",300000);
+            var int = self.setInterval("lee_json()", 300000);
             //var int=self.setInterval("lee_json()",300);
         </script>
     </head>
