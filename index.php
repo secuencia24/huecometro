@@ -2,6 +2,7 @@
 //include '../desarrollo/include/generic_validate_session.php';
 include 'admin/lib/ControllerData.php';
 //include 'admin/include/generic_validate_session.php';
+//un comentario
 //include 'admin/lib/ControllerData.php';
 
 $hoy = date("d-m-Y");
